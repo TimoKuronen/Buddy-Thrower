@@ -33,7 +33,7 @@ namespace Tosser.Core
 
         void CheckCollection()
         {
-            if (collectedCoins >= PrefabInstancer.instance.spawnCoinCount)
+            if (collectedCoins >= PrefabInstancer.instance.GetCointCount)
                 EndRoundTrigger();
 
         }

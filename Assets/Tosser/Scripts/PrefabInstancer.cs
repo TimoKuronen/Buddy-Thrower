@@ -7,13 +7,14 @@ namespace Tosser.Core
     public class PrefabInstancer : MonoBehaviour
     {
         public static PrefabInstancer instance;
-        public int spawnCoinCount;
+
+        [SerializeField] private int spawnCoinCount;
         [SerializeField] private GameObject coinObject;
         [SerializeField] private GameObject specialCoinObject;
         [SerializeField] private List<Transform> coinSpawnPositions = new List<Transform>();
 
         [SerializeField] private int playerCount = 1;
-        public int currentPlayerCount;
+        [SerializeField] private int currentPlayerCount;
 
         [SerializeField] private List<Transform> characterStartPositions = new List<Transform>();
         [SerializeField] private GameObject playerObject;
@@ -21,18 +22,25 @@ namespace Tosser.Core
         [SerializeField] private GameObject enemyObject;
         private List<int> usedValues = new List<int>();
 
+        public int GetCointCount => spawnCoinCount;
+
         private void Awake()
         {
             instance = this;
         }
+
         IEnumerator Start()
         {
             FillList(0, characterStartPositions.Count - 1, 4);
             SpawnPlayers();
+
             yield return new WaitForEndOfFrame();
+
             SpawnEnemies();
             usedValues.Clear();
+
             yield return new WaitForEndOfFrame();
+
             SpawnCoins();
         }
 

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EnemyStats
   m_EditorClassIdentifier: 
   walkSpeed: 2
-  turnSpeed: 0
+  turnSpeed: 80
   dragSpeed: 15
   dragCoolDown: 0
   throwDistance: 13

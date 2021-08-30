@@ -12,6 +12,7 @@ namespace Tosser.Core
         public void DragEvent(bool value, Transform targetTransform, Character character)
         {
             dragPosition = targetTransform;
+
             if (character.botAI != null)
                 character.botAI.SetDragState(value);
             else character.playerManager.SetDragState(value);

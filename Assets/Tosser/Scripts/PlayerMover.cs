@@ -26,6 +26,7 @@ namespace Tosser.Controls
         {
             if (notReady || PlayerInput.instance.ControlsLocked)
                 return;
+
             InputSystem();
         }
 
