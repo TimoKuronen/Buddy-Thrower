@@ -9,6 +9,10 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Mm]emoryCaptures/
+/Assets/DigitalKonstrukt
+/Assets/Easy Character Movement
+/Assets/Rewired
+/Assets/Plugins/Pixelplacement
  
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
@@ -57,3 +61,8 @@ sysinfo.txt
  
 # Crashlytics generated file
 crashlytics-build.properties
+Assets/DigitalKonstrukt.meta
+Assets/Easy Character Movement.meta
+Assets/Rewired.meta
+Assets/Plugins/Pixelplacement.meta
+Assets/Plugins.meta
