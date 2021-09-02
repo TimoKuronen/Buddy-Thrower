@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Rewired;
 using UnityEngine.Events;
@@ -41,7 +39,7 @@ namespace Tosser.Controls
             joystickInputVertical = re_Player.GetAxis("Move Vertical");
 
             joystickRotateHorizontal = re_Player.GetAxis("Rotate Horizontal");
-            joystickRotateVertical = re_Player.GetAxis("rotate Vertical");
+            joystickRotateVertical = re_Player.GetAxis("Rotate Vertical");
 
             // DRAG INPUT IS HANDLED BY UNITY EVENT
         }

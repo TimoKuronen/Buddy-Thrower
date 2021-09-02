@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Tosser.AI;
 using Tosser.Generics;
-using Tosser.Controls;
 using Tosser.Core;
 
 namespace Tosser.PlayerCore
@@ -19,7 +16,7 @@ namespace Tosser.PlayerCore
             Carried,
             Flying
         }
-
+        public static PlayerManager Instance;
         public BotAI allyBot;
         DragCharacter dragCharacter;
         public CharacterState characterState;
@@ -27,7 +24,7 @@ namespace Tosser.PlayerCore
 
         public void SetupPlayer()
         {
-            allyBot.playerManager = this;
+           // allyBot.playerManager = this;
         }
 
         public void SetDragState(bool value)
@@ -50,6 +47,7 @@ namespace Tosser.PlayerCore
 
         private void OnEnable()
         {
+            Instance = this;
             Invoke(nameof(SetupPlayer), 1);
         }
 

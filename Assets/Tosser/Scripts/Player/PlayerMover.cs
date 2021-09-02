@@ -1,24 +1,29 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Tosser.Controls
 {
     public class PlayerMover : MonoBehaviour
     {
-        public CharacterStats characterStats;
-        Vector3 forward, right;
+        [SerializeField] private CharacterStats characterStats;
         [SerializeField] private Vector3 heading;
-        bool notReady = true;
+
+        private Vector3 forward, right;
+        private float deadZone = 0.01f;
+        private bool notReady = true;
+        private CharacterController characterController;
 
         IEnumerator Start()
         {
             yield return new WaitForSeconds(1f);
 
+            characterController = GetComponent<CharacterController>();
+
             forward = Camera.main.transform.forward;
             forward.y = 0;
             forward = Vector3.Normalize(forward);
             right = Quaternion.Euler(new Vector3(0, 90, 0)) * forward;
+
             notReady = false;
         }
 
@@ -32,18 +37,19 @@ namespace Tosser.Controls
 
         void InputSystem()
         {
-            Vector3 direction = new Vector3(PlayerInput.instance.joystickInputHorizontal, 0, PlayerInput.instance.joystickInputVertical);
-            Vector3 rightMovement = right * characterStats.walkSpeed * Time.deltaTime * PlayerInput.instance.joystickInputHorizontal;
-            Vector3 upMovement = forward * characterStats.walkSpeed * Time.deltaTime * PlayerInput.instance.joystickInputVertical;
-            heading = Vector3.Normalize(rightMovement + upMovement);
+            // Movement
+            Vector3 rightMovement = PlayerInput.instance.joystickInputVertical * forward.normalized + PlayerInput.instance.joystickInputHorizontal * right.normalized;
 
-            Vector3 rightRotation = right * PlayerInput.instance.joystickRotateHorizontal;
-            Vector3 upRotation = forward * PlayerInput.instance.joystickInputVertical;
+            // Rotation
+            Vector3 rightRotation = right * characterStats.turnSpeed * Time.deltaTime * PlayerInput.instance.joystickRotateHorizontal;
+            Vector3 upRotation = forward * characterStats.turnSpeed * Time.deltaTime * PlayerInput.instance.joystickRotateVertical;
 
-            Rotate(heading);
-
-            transform.position += rightMovement;
-            transform.position += upMovement;
+            if (rightRotation.magnitude > deadZone || upRotation.magnitude > deadZone)
+            {
+                heading = Vector3.Normalize(rightRotation + upRotation);
+                Rotate(heading);
+            }
+            characterController.Move(rightMovement * Time.deltaTime * characterStats.walkSpeed);
         }
 
         public void Rotate(Vector3 target)

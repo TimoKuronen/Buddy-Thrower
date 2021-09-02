@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class RoundManager : MonoBehaviour
 {
-    
-
-    IEnumerator SlowdownTime(float duration, float timeScale)
+    public IEnumerator SlowdownTime(float duration, float timeScale)
     {
         if (timeScale == 0)
         {

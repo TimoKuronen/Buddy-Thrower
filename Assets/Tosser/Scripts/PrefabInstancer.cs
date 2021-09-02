@@ -13,7 +13,7 @@ namespace Tosser.Core
         [SerializeField] private GameObject specialCoinObject;
         [SerializeField] private List<Transform> coinSpawnPositions = new List<Transform>();
 
-        [SerializeField] private int playerCount = 1;
+       // [SerializeField] private int playerCount = 1;
         [SerializeField] private int currentPlayerCount;
 
         [SerializeField] private List<Transform> characterStartPositions = new List<Transform>();

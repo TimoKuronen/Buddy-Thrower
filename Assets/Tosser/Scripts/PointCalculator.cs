@@ -11,6 +11,9 @@ namespace Tosser.Core
         [SerializeField] private int enemyPoints;
         [SerializeField] private int playerPoints;
 
+        public int GetPlayerPoints => playerPoints;
+        public int GetEnemyPoints => enemyPoints;
+
         private void Awake()
         {
             instance = this;
@@ -18,14 +21,10 @@ namespace Tosser.Core
 
         public void CoinCollected(bool playerCollected)
         {
-            if (playerCollected)
-            {
-                playerPoints++;
-            }
-            else
-            {
-                enemyPoints++;
-            }
+            if (playerCollected)           
+                playerPoints++;           
+            else           
+                enemyPoints++;          
 
             collectedCoins++;
             CheckCollection();
@@ -35,7 +34,6 @@ namespace Tosser.Core
         {
             if (collectedCoins >= PrefabInstancer.instance.GetCointCount)
                 EndRoundTrigger();
-
         }
 
         void EndRoundTrigger()

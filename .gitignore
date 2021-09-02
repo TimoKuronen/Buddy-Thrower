@@ -13,6 +13,7 @@
 /Assets/Easy Character Movement
 /Assets/Rewired
 /Assets/Plugins/Pixelplacement
+/Assets/TextMesh Pro
  
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
@@ -66,3 +67,4 @@ Assets/Easy Character Movement.meta
 Assets/Rewired.meta
 Assets/Plugins/Pixelplacement.meta
 Assets/Plugins.meta
+Assets/TextMesh Pro.meta

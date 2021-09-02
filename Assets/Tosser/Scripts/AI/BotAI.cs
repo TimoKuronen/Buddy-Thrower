@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Tosser.PlayerCore;
@@ -27,6 +25,7 @@ namespace Tosser.AI
         public PlayerManager playerManager;
         public CharacterState characterState;
         public GameObject targetPosition;
+
         private void Awake()
         {
             navMeshAgent = GetComponent<NavMeshAgent>();
@@ -41,6 +40,12 @@ namespace Tosser.AI
 
         void SetupAI()
         {
+            if (gameObject.layer == 8)
+            {
+                playerManager = PlayerManager.Instance;
+                playerManager.allyBot = this;
+            }
+
             if (playerManager == null)
             {
                 GameObject[] otherAI = GameObject.FindGameObjectsWithTag("Enemy");

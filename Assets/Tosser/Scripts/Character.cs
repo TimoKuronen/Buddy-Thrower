@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Tosser.AI;
 using Tosser.PlayerCore;
-using Tosser.Controls;
 
 namespace Tosser.Core
 {
