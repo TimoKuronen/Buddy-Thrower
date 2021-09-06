@@ -15,24 +15,22 @@ namespace Tosser.Controls
         public float joystickRotateHorizontal;
         public float joystickRotateVertical;
 
-        public UnityEvent DragButtonPressed;
-        public UnityEvent DragButtonReleased;
+        public delegate void DragInputEvent();
+        public event DragInputEvent dragEvent;
 
-        private bool controlsLocked;
-
-        public bool ControlsLocked => controlsLocked;
+        public delegate void ThrowInputEvent();
+        public event ThrowInputEvent throwEvent;
 
         private void Awake()
         {
             instance = this;
         }
-        // Start is called before the first frame update
+
         void Start()
         {
             re_Player = ReInput.players.GetPlayer(0);
         }
 
-        // Update is called once per frame
         void Update()
         {
             joystickInputHorizontal = re_Player.GetAxis("Move Horizontal");
@@ -41,12 +39,10 @@ namespace Tosser.Controls
             joystickRotateHorizontal = re_Player.GetAxis("Rotate Horizontal");
             joystickRotateVertical = re_Player.GetAxis("Rotate Vertical");
 
-            // DRAG INPUT IS HANDLED BY UNITY EVENT
-        }
-
-        public void LockControls(bool value)
-        {
-            controlsLocked = value;
+            if (re_Player.GetButtonDown("Drag"))
+                dragEvent?.Invoke();
+            if (re_Player.GetButtonDown("Throw"))
+                throwEvent?.Invoke();
         }
     }
 }

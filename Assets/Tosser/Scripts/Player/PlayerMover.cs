@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Tosser.Controls
@@ -12,6 +13,7 @@ namespace Tosser.Controls
         private float deadZone = 0.01f;
         private bool notReady = true;
         private CharacterController characterController;
+        private List<Component> moveBlockers = new List<Component>();
 
         IEnumerator Start()
         {
@@ -19,6 +21,7 @@ namespace Tosser.Controls
 
             characterController = GetComponent<CharacterController>();
 
+            // Set direction parameters
             forward = Camera.main.transform.forward;
             forward.y = 0;
             forward = Vector3.Normalize(forward);
@@ -27,9 +30,26 @@ namespace Tosser.Controls
             notReady = false;
         }
 
+        public void AddMoveBlocker(Component component)
+        {
+            if (!moveBlockers.Contains(component))
+                moveBlockers.Add(component);
+        }
+
+        public void RemoveMoveBlocker(Component component)
+        {
+            if (moveBlockers.Contains(component))
+                moveBlockers.Remove(component);
+        }
+
+        bool CanMove()
+        {
+            return moveBlockers.Count == 0;
+        }
+
         void Update()
         {
-            if (notReady || PlayerInput.instance.ControlsLocked)
+            if (notReady || !CanMove())
                 return;
 
             InputSystem();

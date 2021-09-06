@@ -2,10 +2,11 @@ using UnityEngine;
 using UnityEngine.AI;
 using Tosser.PlayerCore;
 using Tosser.Generics;
+using Tosser.Core;
 
 namespace Tosser.AI
 {
-    public class BotAI : MonoBehaviour
+    public class BotAI : MonoBehaviour, IDragCharacter
     {
         [SerializeField] private CharacterStats enemyStats;
         [SerializeField] private NavMeshAgent navMeshAgent;
@@ -20,22 +21,17 @@ namespace Tosser.AI
             Carried,
             Flying
         }
-
-        public BotAI otherBot;
-        public PlayerManager playerManager;
         public CharacterState characterState;
-        public GameObject targetPosition;
+        public BotAI otherBot;
+
+        private PlayerManager playerManager;
+        private DragCharacter dragCharacter;
 
         private void Awake()
         {
             navMeshAgent = GetComponent<NavMeshAgent>();
             stateController = GetComponent<StateController>();
-        }
-
-        public void SetDragState(bool value)
-        {
-            if (value)
-                characterState = CharacterState.Carried;
+            dragCharacter = GetComponent<DragCharacter>();
         }
 
         void SetupAI()
@@ -43,7 +39,7 @@ namespace Tosser.AI
             if (gameObject.layer == 8)
             {
                 playerManager = PlayerManager.Instance;
-                playerManager.allyBot = this;
+                playerManager.SetAlly(this, dragCharacter);
             }
 
             if (playerManager == null)
@@ -68,6 +64,17 @@ namespace Tosser.AI
         {
             Invoke(nameof(SetupAI), 1);
         }
+
+        public void DragCharacter(DragCharacter draggingCharacter)
+        {
+            dragCharacter.DragEvent(draggingCharacter);
+        }
+
+        public void DragStopped()
+        {
+          
+        }
+
         /// 1. Look for collectible
         /// 2. When we find object, see if we are closer to it than our ally
         /// 3. If not, we throw friend there

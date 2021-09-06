@@ -200,7 +200,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3170297953449454413}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 537133965526674913}
@@ -232,7 +232,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5584238225032371292}
   m_LocalRotation: {x: -0.4702295, y: -0.057037424, z: -0.14330636, w: 0.86896163}
-  m_LocalPosition: {x: 0.735, y: 0.46000004, z: 0.456}
+  m_LocalPosition: {x: 0.735, y: 1, z: 0.456}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8676863502695050186}
@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: -1519244121705942396}
   - component: {fileID: -6988484247933746147}
   - component: {fileID: -6498399047555983658}
-  - component: {fileID: 1433344247826660515}
+  - component: {fileID: 8305214654563059222}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Enemy
@@ -291,7 +291,7 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!195 &7556852138648592116
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -311,7 +311,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 1
+  m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &4923612023598564089
@@ -329,9 +329,8 @@ MonoBehaviour:
   enemyStats: {fileID: 11400000, guid: d65731e81b54fa841903fd5c0138722e, type: 2}
   navMeshAgent: {fileID: 0}
   stateController: {fileID: 0}
+  characterState: 0
   otherBot: {fileID: 0}
-  playerManager: {fileID: 0}
-  targetPosition: {fileID: 0}
 --- !u!114 &648439837755488408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -395,10 +394,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ce114fec521b2e46b3ac337b4751987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dragSpeed: 10
-  dragPosition: {fileID: 6162545383160021323}
   characterStats: {fileID: 11400000, guid: d65731e81b54fa841903fd5c0138722e, type: 2}
---- !u!114 &1433344247826660515
+  throwTargetVisual: {fileID: 0}
+  buddyPosition: {fileID: 6162545383160021323}
+--- !u!114 &8305214654563059222
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -407,8 +406,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8676863502695050190}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40fd5950b53b1464f8a56a6bf437a345, type: 3}
+  m_Script: {fileID: 11500000, guid: ae1235be5edfaa340831f9db0e0eaa0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  botAI: {fileID: 4923612023598564089}
-  playerMover: {fileID: 0}

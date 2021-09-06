@@ -9,7 +9,7 @@ public class CharacterStats : ScriptableObject
     public float walkSpeed;
     [Range(300, 800)] 
     public float turnSpeed;
-    [Range(10, 20)] 
+    [Range(10, 40)] 
     public float dragSpeed;
     [Range(1, 3)] 
     public float dragCoolDown;

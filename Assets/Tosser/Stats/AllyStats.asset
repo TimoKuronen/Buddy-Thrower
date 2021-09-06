@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 2
   turnSpeed: 80
-  dragSpeed: 15
+  dragSpeed: 30
   dragCoolDown: 0
   throwDistance: 13
   throwWobble: 0

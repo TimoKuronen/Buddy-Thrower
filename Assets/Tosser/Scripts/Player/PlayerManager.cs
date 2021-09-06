@@ -2,10 +2,11 @@ using UnityEngine;
 using Tosser.AI;
 using Tosser.Generics;
 using Tosser.Core;
+using Tosser.Controls;
 
 namespace Tosser.PlayerCore
 {
-    public class PlayerManager : MonoBehaviour, IDamageHandler
+    public class PlayerManager : MonoBehaviour, IDamageHandler, IDragCharacter
     {
         public enum CharacterState
         {
@@ -16,39 +17,47 @@ namespace Tosser.PlayerCore
             Carried,
             Flying
         }
-        public static PlayerManager Instance;
-        public BotAI allyBot;
-        DragCharacter dragCharacter;
+
         public CharacterState characterState;
-        Character character;
 
-        public void SetupPlayer()
+        public static PlayerManager Instance;
+
+        private BotAI allyBot;
+        private DragCharacter allyDrag;
+        private DragCharacter dragCharacter;
+
+        void Awake()
         {
-           // allyBot.playerManager = this;
+            dragCharacter = GetComponent<DragCharacter>();
         }
 
-        public void SetDragState(bool value)
+        void DragInput()
         {
-            if (value)
-                characterState = CharacterState.Carried;
+            if (characterState == CharacterState.Idle)
+            {
+                dragCharacter.DragEvent(allyDrag);
+            }
+            else
+            {
+
+            }
         }
 
-        public void DragInputGiven()
+        public void SetAlly(BotAI botAI, DragCharacter dragCharacter)
         {
-            dragCharacter.DragEvent(true, allyBot.transform, character);
-            characterState = CharacterState.Dragging;
+            allyBot = botAI;
+            allyDrag = dragCharacter;
         }
 
-        public void DragInputStopped()
+        void ThrowInput()
         {
-            dragCharacter.DragEvent(false, allyBot.transform, character);
-            characterState = CharacterState.Idle;
+            if (characterState != CharacterState.Carrying)
+                return;
         }
 
-        private void OnEnable()
+        public void TakeDamage(int amount, Transform origin)
         {
-            Instance = this;
-            Invoke(nameof(SetupPlayer), 1);
+            throw new System.NotImplementedException();
         }
 
         private void OnTriggerEnter(Collider other)
@@ -57,9 +66,27 @@ namespace Tosser.PlayerCore
                 other.GetComponent<Collectible>().PickUp(true);
         }
 
-        public void TakeDamage(int amount, Transform origin)
+        private void OnEnable()
+        {
+            Instance = this;
+            PlayerInput.instance.dragEvent += DragInput;
+            PlayerInput.instance.throwEvent += ThrowInput;
+        }
+
+        void OnDisable()
+        {
+            PlayerInput.instance.dragEvent -= DragInput;
+            PlayerInput.instance.throwEvent -= ThrowInput;
+        }
+
+        public void DragStopped()
         {
             throw new System.NotImplementedException();
+        }
+
+        public void DragCharacter(DragCharacter draggingCharacter)
+        {
+            characterState = CharacterState.Carried;
         }
     }
 }
