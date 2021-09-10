@@ -4,38 +4,86 @@ using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
 using Tosser.Core;
+
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
-    private TextMeshProUGUI playerText;
-    private TextMeshProUGUI enemyText;
+    [SerializeField] private TextMeshProUGUI playerText;
+    [SerializeField] private TextMeshProUGUI enemyText;
+    [SerializeField] private GameObject startButton;
+    [SerializeField] private GameObject restartButton;
+    [SerializeField] private GameObject quitButton;
 
     private void Awake()
     {
         Instance = this;
     }
 
-    public void UpdateScore(bool playerScore)
+    private void Start()
     {
-        if (playerScore)
+        
+    }
+
+    public void MainMenu(bool enter)
+    {
+        if (enter)
         {
-            int playerPoints = PointCalculator.instance.GetPlayerPoints;
-            playerText.text = "";
+            startButton.SetActive(true);
+            quitButton.SetActive(true);
+            restartButton.SetActive(false);
         }
         else
         {
-            int enemyoints = PointCalculator.instance.GetEnemyPoints;
-            enemyText.text = "";
+            startButton.SetActive(false);
+            quitButton.SetActive(false);
         }
+    }
+
+    public void PauseMenu(bool enter)
+    {
+        if (enter)
+        {
+            restartButton.SetActive(true);
+            quitButton.SetActive(true);
+        }
+        else
+        {
+            restartButton.SetActive(false);
+            quitButton.SetActive(false);
+        }
+    }
+
+    public void UpdateScore(bool playerScore)
+    {
+        int playerPoints = PointCalculator.instance.GetPlayerPoints;
+        playerText.text = "Player Score: " + playerPoints;
+
+        int enemyPoints = PointCalculator.instance.GetEnemyPoints;
+        enemyText.text = "Enemy Score: " + enemyPoints;
+
+        if (playerScore)
+        {
+            // Play particle effect based on who scored
+        }
+    }
+
+    void StartGame()
+    {
+        MainMenu(false);
+    }
+
+    public void RestartButtonPressed()
+    {
+        StartGame();
     }
 
     public void StartButtonPressed()
     {
-        Debug.Log("start button");
+        StartGame();
     }
 
     public void QuitButtonPressed()
     {
-        Debug.Log("quit button");
+        Application.Quit();
     }
 }

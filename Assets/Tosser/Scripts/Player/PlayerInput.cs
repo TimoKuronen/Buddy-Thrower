@@ -39,9 +39,9 @@ namespace Tosser.Controls
             joystickRotateHorizontal = re_Player.GetAxis("Rotate Horizontal");
             joystickRotateVertical = re_Player.GetAxis("Rotate Vertical");
 
-            if (re_Player.GetButtonDown("Drag"))
+            if (re_Player.GetButtonDown("Drag") || Input.GetKeyDown(KeyCode.D))
                 dragEvent?.Invoke();
-            if (re_Player.GetButtonDown("Throw"))
+            if (re_Player.GetButtonDown("Throw") || Input.GetKeyDown(KeyCode.T))
                 throwEvent?.Invoke();
         }
     }

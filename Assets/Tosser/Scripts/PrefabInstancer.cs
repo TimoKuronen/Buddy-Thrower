@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Tosser.PlayerCore;
 
 namespace Tosser.Core
 {
@@ -67,8 +68,12 @@ namespace Tosser.Core
                     currentPlayerCount++;
                     Instantiate(playerObject, characterStartPositions[usedValues[i]].position, Quaternion.Euler(Vector3.zero));
                 }
-                else Instantiate(playerAlly, characterStartPositions[usedValues[i]].position
-                    + new Vector3(Random.Range(1, 2), characterStartPositions[usedValues[i]].position.y, Random.Range(1, 2)),
+
+                /// Spawn Ally close to player position
+                /// 
+
+                else Instantiate(playerAlly, PlayerManager.Instance.transform.position
+                    + new Vector3(Random.Range(2, 3), characterStartPositions[usedValues[i]].position.y, Random.Range(2, 3)),
                     Quaternion.Euler(Vector3.zero));
             }           
         }
@@ -92,7 +97,7 @@ namespace Tosser.Core
 
             for (int i = 0; i < spawnCoinCount; i++)
             {
-                Instantiate(coinObject, coinSpawnPositions[usedValues[i]].position, Quaternion.Euler(Vector3.zero));
+                Instantiate(coinObject, coinSpawnPositions[usedValues[i]].position + Vector3.up, Quaternion.Euler(Vector3.zero));
             }
             usedValues.Clear();
         }
