@@ -1,18 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
-using UnityEngine.Events;
 using TMPro;
 using Tosser.Core;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
     [SerializeField] private TextMeshProUGUI playerText;
     [SerializeField] private TextMeshProUGUI enemyText;
-    [SerializeField] private GameObject startButton;
-    [SerializeField] private GameObject restartButton;
-    [SerializeField] private GameObject quitButton;
+    [SerializeField] private Button startButton;
+    [SerializeField] private Button restartButton;
+    [SerializeField] private Button quitButton;
+    [SerializeField] private Button menuButton;
 
     private void Awake()
     {
@@ -21,36 +21,33 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        
+        startButton.onClick.AddListener(StartButtonPressed);
+        quitButton.onClick.AddListener(QuitButtonPressed);
+        menuButton.onClick.AddListener(MainMenuButtonPressed);
     }
 
     public void MainMenu(bool enter)
     {
         if (enter)
         {
-            startButton.SetActive(true);
-            quitButton.SetActive(true);
-            restartButton.SetActive(false);
+            startButton.gameObject.SetActive(true);
+            quitButton.gameObject.SetActive(true);
+            restartButton.gameObject.SetActive(false);
+            menuButton.gameObject.SetActive(true);
         }
         else
         {
-            startButton.SetActive(false);
-            quitButton.SetActive(false);
+            startButton.gameObject.SetActive(false);
+            quitButton.gameObject.SetActive(false);
+            menuButton.gameObject.SetActive(false);
         }
     }
 
     public void PauseMenu(bool enter)
     {
-        if (enter)
-        {
-            restartButton.SetActive(true);
-            quitButton.SetActive(true);
-        }
-        else
-        {
-            restartButton.SetActive(false);
-            quitButton.SetActive(false);
-        }
+        restartButton.gameObject.SetActive(enter);
+        quitButton.gameObject.SetActive(enter);
+        menuButton.gameObject.SetActive(enter);
     }
 
     public void UpdateScore(bool playerScore)
@@ -77,6 +74,11 @@ public class UIManager : MonoBehaviour
         StartGame();
     }
 
+    public void MainMenuButtonPressed()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     public void StartButtonPressed()
     {
         StartGame();
@@ -85,5 +87,10 @@ public class UIManager : MonoBehaviour
     public void QuitButtonPressed()
     {
         Application.Quit();
+    }
+
+    private void OnDisable()
+    {
+        startButton.onClick.RemoveAllListeners();
     }
 }
