@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 2706545447946546241}
   - component: {fileID: -2767507484083396559}
   - component: {fileID: -4728299670406884464}
+  - component: {fileID: -4130229277071091007}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -82,9 +83,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96049f55607ae2c48bf640c9d0037006, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  throwAssistantObject: {fileID: 5658899309455183202, guid: d4c439c05d2e3a3498aaf1d7ebb91d7a,
+  characterStats: {fileID: 0}
+  throwAssistantPrefab: {fileID: 5658899309455183202, guid: d4c439c05d2e3a3498aaf1d7ebb91d7a,
     type: 3}
-  characterStats: {fileID: 11400000, guid: 74083759521337b469910c33bb3fb320, type: 2}
   throwTargetPosition: {x: 0, y: 0, z: 0}
   offset: {x: 0, y: 0, z: 0}
   tosserObject: {fileID: 0}
@@ -102,8 +103,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ce114fec521b2e46b3ac337b4751987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterStats: {fileID: 11400000, guid: 74083759521337b469910c33bb3fb320, type: 2}
-  throwTargetVisual: {fileID: 7062446680253857790}
   buddyPosition: {fileID: 6235927662611168004}
 --- !u!114 &2706545447946546241
 MonoBehaviour:
@@ -118,6 +117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterState: 0
+  characterStats: {fileID: 11400000, guid: 74083759521337b469910c33bb3fb320, type: 2}
 --- !u!143 &-2767507484083396559
 CharacterController:
   m_ObjectHideFlags: 0
@@ -146,6 +146,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae1235be5edfaa340831f9db0e0eaa0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-4130229277071091007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2469216279381274178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40fd5950b53b1464f8a56a6bf437a345, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3256333942768450295
@@ -232,6 +244,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -348,6 +361,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -460,12 +474,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4c439c05d2e3a3498aaf1d7ebb91d7a, type: 3}
---- !u!1 &7062446680253857790 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5658899309455183202, guid: d4c439c05d2e3a3498aaf1d7ebb91d7a,
-    type: 3}
-  m_PrefabInstance: {fileID: 3209565867413959324}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7062446680253857791 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5658899309455183203, guid: d4c439c05d2e3a3498aaf1d7ebb91d7a,

@@ -6,7 +6,8 @@ namespace Tosser.Core
 {
     public class Character : MonoBehaviour
     {
-        public BotAI botAI;
-        public PlayerManager playerManager;
+        public static CharacterStats characterStats;
+        //public BotAI botAI;
+        //public PlayerManager playerManager;
     }
 }

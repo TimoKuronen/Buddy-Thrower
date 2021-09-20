@@ -31,7 +31,7 @@ public class ObjectThrower : MonoBehaviour
         navMeshAgent.enabled = false;
         charControl.enabled = false;
         if (gameObject.activeInHierarchy)
-            throwMethod.StartCoroutine(throwMethod.Throwing(targetPosition, dragSpeed, false, 1, true, true));
+            ThrowMethod.Instance.StartCoroutine(ThrowMethod.Throwing(targetPosition, dragSpeed, false, 1, true, true, transform));
         else Debug.Log("fish wasn't active when it was supposed to jump to boat");
     }
 

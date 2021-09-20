@@ -4683,7 +4683,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7052824d0bede1e4ab5d03e9d7c59d0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  usaAwake: 0
+  usaAwake: 1
   enableObjects:
   - {fileID: 1529989986}
 --- !u!1001 &869438317
@@ -6327,6 +6327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4c7916cdf9b75348801cfbe45882ce2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerName: 
 --- !u!4 &1369441299
 Transform:
   m_ObjectHideFlags: 0
@@ -8699,7 +8700,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1529989987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10097,7 +10098,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Start
+  m_Text: Continue
 --- !u!222 &1775385692
 CanvasRenderer:
   m_ObjectHideFlags: 0

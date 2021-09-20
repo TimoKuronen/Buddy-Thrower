@@ -1,11 +1,17 @@
 ﻿using System.Collections;
 using UnityEngine;
+using Tosser.Core;
 
 public class ThrowMethod : MonoBehaviour
 {
-    public float times;
+    public static ThrowMethod Instance;
 
-    public IEnumerator Throwing(Vector3 targetPos, Vector3 startPos, float height, float speed)
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+    public static IEnumerator Throwing(Vector3 targetPos, Vector3 startPos, float height, float speed, Transform transform, DragCharacter dragCharacter)
     {
         bool throwing = true;
 
@@ -27,17 +33,13 @@ public class ThrowMethod : MonoBehaviour
             {
                 Debug.Log("arrived");
                 throwing = false;
+                dragCharacter.DragCompleted(dragCharacter);
             }
             yield return null;
         }
     }
 
-    static Quaternion LookAt2D(Vector2 forward)
-    {
-        return Quaternion.Euler(0, 0, Mathf.Atan2(forward.y, forward.x) * Mathf.Rad2Deg);
-    }
-
-    public IEnumerator Throwing(Vector3 targetTransform, float dragSpeed, bool returnRigidbody, float distanceLimit, bool disableWhenFinished, bool lookAt)
+    public static IEnumerator Throwing(Vector3 targetTransform, float dragSpeed, bool returnRigidbody, float distanceLimit, bool disableWhenFinished, bool lookAt, Transform transform)
     {
         bool throwing = true;
         float distanceToTarget = Vector3.Distance(transform.position, targetTransform);
@@ -55,7 +57,7 @@ public class ThrowMethod : MonoBehaviour
             {
                 throwing = false;
                 if (disableWhenFinished)
-                    gameObject.SetActive(false);
+                    transform.gameObject.SetActive(false);
             }
             else
                 transform.Translate(Vector3.forward * Mathf.Min(dragSpeed * Time.deltaTime, currentDist));
@@ -63,17 +65,16 @@ public class ThrowMethod : MonoBehaviour
             yield return null;
         }
         if (returnRigidbody)
-            GetComponent<Rigidbody>().isKinematic = false;
+            transform.GetComponent<Rigidbody>().isKinematic = false;
     }
 
-    public IEnumerator Throwing(Vector3 targetPosition, Vector3 startPosition, float height, float duration, bool disableOnEnd)
+    public static IEnumerator Throwing(Vector3 targetPosition, Vector3 startPosition, float height, float duration, bool disableOnEnd, Transform transform)
     {
         bool throwing = true;
         float timer = 0;
 
         while (throwing)
         {
-            times += Time.deltaTime;
             timer += Time.deltaTime * duration;
             timer %= 5;
             transform.position = MathParabola.Parabola(startPosition, targetPosition, height, timer / duration);
@@ -81,11 +82,16 @@ public class ThrowMethod : MonoBehaviour
             if (dist < 1)
             {
                 throwing = false;
-                GetComponent<Rigidbody>().isKinematic = false;
+                transform.GetComponent<Rigidbody>().isKinematic = false;
                 if (disableOnEnd)
-                    gameObject.SetActive(false);
+                    transform.gameObject.SetActive(false);
             }
             yield return null;
         }
+    }
+
+    static Quaternion LookAt2D(Vector2 forward)
+    {
+        return Quaternion.Euler(0, 0, Mathf.Atan2(forward.y, forward.x) * Mathf.Rad2Deg);
     }
 }

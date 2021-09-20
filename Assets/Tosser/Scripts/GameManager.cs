@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
         Instance = this;
         
         DontDestroyOnLoad(gameObject);
-        LoadColor();
+        LoadName();
     }
 
     [System.Serializable]
@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
         File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
     }
 
-    public void LoadColor()
+    public void LoadName()
     {
         string path = Application.persistentDataPath + "/savefile.json";
         if (File.Exists(path))

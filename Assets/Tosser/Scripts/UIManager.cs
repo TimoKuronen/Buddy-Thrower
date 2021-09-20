@@ -24,6 +24,7 @@ public class UIManager : MonoBehaviour
         startButton.onClick.AddListener(StartButtonPressed);
         quitButton.onClick.AddListener(QuitButtonPressed);
         menuButton.onClick.AddListener(MainMenuButtonPressed);
+        MainMenu(false);
     }
 
     public void MainMenu(bool enter)
